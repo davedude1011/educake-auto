@@ -32,6 +32,7 @@ export function HoverBorderGradient({
     const nextIndex = clockwise
       ? (currentIndex - 1 + directions.length) % directions.length
       : (currentIndex + 1) % directions.length;
+      // @ts-expect-error okay
     return directions[nextIndex];
   };
 
