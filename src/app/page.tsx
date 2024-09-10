@@ -13,8 +13,8 @@ import { Skeleton } from "~/components/ui/skeleton"
 import { Progress } from "~/components/ui/progress"
 
 export default function Page() {
-  const [quizId, setQuizId] = useState("134790229")
-  const [jwtToken, setJwtToken] = useState("Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjU5OTM5ODYsIm5iZiI6MTcyNTk5Mzk4NiwiZXhwIjoxNzI1OTk1Nzg3LCJpc3MiOiJFZHVjYWtlIiwiYXVkIjoic2Vzc2lvbiIsInVpZCI6IjMwMDI3NTgiLCJyb2xlIjoic3R1ZGVudCIsInRpdGxlIjoiIiwiZmlyc3RfbmFtZSI6IlRob21hcyIsImxhc3RfbmFtZSI6IlNNQUxMV09PRCIsInNjaG9vbF9uYW1lIjoiUm9iZXJ0c2JyaWRnZSBDb21tdW5pdHkgQ29sbGVnZSIsInNjaG9vbF9hZGRyZXNzIjoiS25lbGxlIFJvYWQsIFJPQkVSVFNCUklER0UsIEVhc3QgU3Vzc2V4LCBVSywgVE4zMiA1RUEifQ.2bJyI4ulAu-1xYvLg_1esqMIzrsMCTaB053hZuTSpRw")
+  const [quizId, setQuizId] = useState("")
+  const [jwtToken, setJwtToken] = useState("")
 
   const [quizData, setQuizData] = useState(null as QuizData|null)
   //const quizQuestionDataArray = quizData?.questions.map((questionId) => quizData?.questionMap[questionId])
@@ -71,12 +71,12 @@ export default function Page() {
     <div className="bg-background w-screen h-screen dark flex itemscenter justify-center">
       <TextHoverEffect text="Educake" />
       <div className="w-full h-full flex justify-center items-center">
-        <div className="flex flex-col items-center text-primary min-w-fit p-12 w-[30rem] gap-6 border rounded-md bg-background z-20 h-fit">
+        <div className="flex flex-col items-center text-primary min-w-fit h-full md:h-fit p-12 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
           {
             quizData ? (
-              <div className="flex flex-col gap-6 w-[30rem]">
+              <div className="flex flex-col gap-6 w-full md:w-[30rem] h-full md:h-fit">
                 <Progress value={completionPercent} />
-                <div className="flex flex-col gap-2 w-[30rem]">
+                <div className="flex flex-col gap-2 w-full md:w-[30rem] h-full md:h-fit">
                   <div className="font-bold">{displayQuestion}</div>
                   <div className="font-thin flex flex-row gap-2 items-center">
                     <LuSparkles />
