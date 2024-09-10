@@ -67,7 +67,7 @@ export default function Page() {
     }
   }
 
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
 
   return (
     <div className={`bg-background w-screen h-screen ${isDarkMode && "dark"} flex itemscenter justify-center transition-all`}>
