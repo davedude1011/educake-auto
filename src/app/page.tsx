@@ -5,7 +5,7 @@ import { Label } from "~/components/ui/label"
 import { Button } from "~/components/ui/button"
 import { TextHoverEffect } from "~/components/ui/text-hover-effect"
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient"
-import { LuCode2, LuSparkles } from "react-icons/lu";
+import { LuCode2, LuMoonStar, LuSparkles, LuSun } from "react-icons/lu";
 import { useEffect, useState } from "react"
 import { getAnswer, getQuizData, postAnswer } from "~/server/educake"
 import type { QuizData, Question } from "./educakeType"
@@ -67,11 +67,18 @@ export default function Page() {
     }
   }
 
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
   return (
-    <div className="bg-background w-screen h-screen dark flex itemscenter justify-center">
+    <div className={`bg-background w-screen h-screen ${isDarkMode && "dark"} flex itemscenter justify-center transition-all`}>
       <TextHoverEffect text="Educake" />
       <div className="w-full h-full flex justify-center items-center">
-        <div className="flex flex-col items-center text-primary min-w-fit h-full md:h-fit p-12 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
+        <div className="relative flex flex-col items-center text-primary min-w-fit h-full md:h-fit p-12 pt-16 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
+          <Button variant={"ghost"} className="absolute top-0 left-0 m-2" onClick={() => setIsDarkMode(!isDarkMode)}>
+            {
+              isDarkMode ? <LuSun /> : <LuMoonStar />
+            }
+          </Button>
           {
             quizData ? (
               <div className="flex flex-col gap-6 w-full md:w-[30rem] h-full md:h-fit">
