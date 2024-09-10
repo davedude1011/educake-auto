@@ -1,5 +1,6 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
+// @ts-expect-error uhhhhhh
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
 
 export default {
@@ -60,15 +61,19 @@ export default {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require("tailwindcss-animate"),
     addVariablesForColors, // Adding the custom plugin for color variables
   ],
 } satisfies Config;
 
 // Custom plugin to add CSS variables for all colors
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function addVariablesForColors({ addBase, theme }: { addBase: Function; theme: Function }) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const allColors = flattenColorPalette(theme("colors"));
   const newVars = Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
 
