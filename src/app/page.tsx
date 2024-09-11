@@ -5,12 +5,15 @@ import { Label } from "~/components/ui/label"
 import { Button } from "~/components/ui/button"
 import { TextHoverEffect } from "~/components/ui/text-hover-effect"
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient"
-import { LuCode2, LuMoonStar, LuSparkles, LuSun } from "react-icons/lu";
+import { LuCode2, LuHelpCircle, LuMoonStar, LuSparkles, LuSun } from "react-icons/lu";
 import { useEffect, useState } from "react"
 import { getAnswer, getQuizData, postAnswer } from "~/server/educake"
 import type { QuizData, Question } from "./educakeType"
 import { Skeleton } from "~/components/ui/skeleton"
 import { Progress } from "~/components/ui/progress"
+
+import Nav from "next/link"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 
 export default function Page() {
   const [quizId, setQuizId] = useState("")
@@ -79,6 +82,21 @@ export default function Page() {
               isDarkMode ? <LuSun /> : <LuMoonStar />
             }
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="absolute top-0 right-0 m-2">
+                <Button variant={"ghost"}>
+                  <LuHelpCircle />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="flex flex-col bg-background">
+              <Nav href={"/tutorial?type=quiz-id"}>
+                <Button variant={"ghost"}>How to get Quiz ID</Button>
+              </Nav>
+              <Nav href={"/tutorial?type=jwt-token"}>
+                <Button variant={"ghost"}>How to get JWT Token</Button>
+              </Nav>
+            </DropdownMenuContent>
+          </DropdownMenu>
           {
             quizData ? (
               <div className="flex flex-col gap-6 w-full md:w-[30rem] h-full md:h-fit">
