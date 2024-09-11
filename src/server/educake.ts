@@ -36,6 +36,10 @@ export async function getAnswer(questionData: Question) {
 }
 
 export async function postAnswer(questionId: number, answer: string, quizId: string, jwtToken: string) {
+    if (!jwtToken.startsWith("Bearer ")) {
+        jwtToken = "Bearer " + jwtToken;
+    }
+
     const response =  await fetch(`https://my.educake.co.uk/api/attempt/${quizId}/question/${String(questionId)}/answer`, {
         method: "POST",
         headers: {
