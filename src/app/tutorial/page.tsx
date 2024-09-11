@@ -52,7 +52,7 @@ export default function Page() {
 
     return (
         <div className={`${isDarkMode && "dark"} w-screen h-screen bg-background flex justify-center items-center`}>
-            <div className="relative flex flex-col items-center text-primary min-w-fit h-full md:h-fit p-12 pt-16 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
+            <div className="relative flex flex-col justify-evenly items-center text-primary min-w-fit h-full md:h-fit p-12 pt-16 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
                 <Button variant={"ghost"} className="absolute top-0 left-0 m-2" onClick={() => setIsDarkMode(!isDarkMode)}>
                     {
                     isDarkMode ? <LuSun /> : <LuMoonStar />
@@ -70,7 +70,7 @@ export default function Page() {
                     }
                 </div>
                 <Progress value={(tutorialIndex / (tutorialData.length-1))*100} />
-                <img src={tutorialData[tutorialIndex]?.image} alt="" className="max-w-[50rem] rounded-md" />
+                <img src={tutorialData[tutorialIndex]?.image} alt="" className="w-full md:max-w-[50rem] rounded-md" />
                 <div className="text-xl font-thin">{tutorialData[tutorialIndex]?.text}</div>
                 <div className="flex flex-row justify-between w-full">
                     <Button disabled={tutorialIndex == 0} onClick={() => {setTutorialIndex(tutorialIndex-1)}}><LuChevronsLeft /></Button>
