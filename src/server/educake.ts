@@ -4,6 +4,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 import { Question } from "~/app/educakeType";
 
 export async function getQuizData(quizId: string, jwtToken: string) {
+    if (!jwtToken.startsWith("Bearer ")) {
+        jwtToken = "Bearer " + jwtToken;
+    }
+    
     const response =  await fetch("https://my.educake.co.uk/api/student/quiz/" + quizId, {
         method: "GET",
         headers: {
