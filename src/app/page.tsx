@@ -14,6 +14,8 @@ import { Progress } from "~/components/ui/progress"
 
 import Nav from "next/link"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@radix-ui/react-hover-card"
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 export default function Page() {
   const [quizId, setQuizId] = useState("")
@@ -74,6 +76,25 @@ export default function Page() {
 
   return (
     <div className={`bg-background w-screen h-screen ${isDarkMode && "dark"} flex itemscenter justify-center transition-all`}>
+      <div className="z-30 text-primary absolute top-0 md:left-0 m-4">
+        <HoverCard>
+          <HoverCardTrigger>
+            <Nav href={"https://rccrevision.com"}>
+              <Avatar>
+                <AvatarImage src="https://github.com/davedude1011.png" className="rounded-full w-8 md:w-12"></AvatarImage>
+                <AvatarFallback>D0</AvatarFallback>
+              </Avatar>
+            </Nav>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            <Nav href={"https://rccrevision.com"}>
+              <Button className="border bg-background rounded-md mt-2" variant={"link"}>
+                Explore more from me
+              </Button>
+            </Nav>
+          </HoverCardContent>
+        </HoverCard>
+      </div>
       <TextHoverEffect text="Educake" />
       <div className="w-full h-full flex justify-center items-center">
         <div className="relative flex flex-col items-center text-primary min-w-fit h-full md:h-fit p-12 pt-16 w-full md:w-[30rem] gap-6 border rounded-md bg-background z-20">
