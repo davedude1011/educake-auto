@@ -1,7 +1,7 @@
 "use server"
 
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import { Question } from "~/app/educakeType";
+import { type Question } from "~/app/educakeType";
 
 export async function getQuizData(quizId: string, jwtToken: string) {
     if (!jwtToken.startsWith("Bearer ")) {
