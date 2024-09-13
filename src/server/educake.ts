@@ -15,6 +15,7 @@ export async function getQuizData(quizId: string, jwtToken: string) {
         headers: {
             Accept: "application/json;version=2",
             Authorization: jwtToken,
+            referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
         },
         referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
     });
@@ -52,6 +53,7 @@ export async function postAnswer(questionId: number, answer: string, quizId: str
         headers: {
             Accept: "application/json;version=2",
             Authorization: jwtToken,
+            referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
         },
         body: `{\"givenAnswer\":\"${answer}\"}`,
         referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
