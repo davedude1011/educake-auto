@@ -4,8 +4,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type Question } from "~/app/educakeType";
 
 export async function getQuizData(quizId: string, jwtToken: string) {
-    console.log("GET QUIZ DATA")
-    console.log(process.env.GEMINI_API_KEY ?? "GEMINI_API_KEY")
     if (!jwtToken.startsWith("Bearer ")) {
         jwtToken = "Bearer " + jwtToken;
     }
@@ -21,7 +19,14 @@ export async function getQuizData(quizId: string, jwtToken: string) {
     });
     const data = response.json()
 
+    console.log("GET QUIZ DATA")
+    console.log(process.env.GEMINI_API_KEY ?? "GEMINI_API_KEY")
+    console.log(jwtToken)
+    console.log("response")
+    console.log(response)
+    console.log("data")
     console.log(data)
+    console.log("await data")
     console.log(await data)
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
@@ -38,6 +43,7 @@ export async function getAnswer(questionData: Question) {
     const result = await chat.sendMessage(JSON.stringify(questionData))
     const answer = result.response.text().replace(" \n", "").replace("\n", "")
 
+    console.log("GET ANSWER")
     console.log(answer)
 
     return answer
@@ -61,6 +67,12 @@ export async function postAnswer(questionId: number, answer: string, quizId: str
 
     const data = response.json()
 
+    console.log("POST ANSWER")
+    console.log("response")
+    console.log(response)
+    console.log("data")
+    console.log(data)
+    console.log("await data")
     console.log(await data)
     
     return 1
