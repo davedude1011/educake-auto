@@ -75,7 +75,7 @@ export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(true)
 
   const [serverNotWorking, setServerNotWorking] = useState(
-    !window?.location.origin.includes("localhost") || true as boolean
+    typeof window != undefined ? !window.location.origin.includes("localhost") : true
   )
 
   return (
