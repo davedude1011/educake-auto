@@ -74,9 +74,12 @@ export default function Page() {
 
   const [isDarkMode, setIsDarkMode] = useState(true)
 
-  const [serverNotWorking, setServerNotWorking] = useState(
-    typeof window != undefined ? !window.location.origin.includes("localhost") : true
-  )
+  const [serverNotWorking, setServerNotWorking] = useState(false)
+  useEffect(() => {
+    if (!window.location.origin.includes("localhost")) {
+      setServerNotWorking(true)
+    }
+  }, [])
 
   return (
     <div className={`bg-background w-screen h-screen ${isDarkMode && "dark"} flex itemscenter justify-center transition-all`}>
