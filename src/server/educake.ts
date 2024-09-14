@@ -23,6 +23,7 @@ export async function getQuizData(quizId: string, jwtToken: string) {
             Authorization: jwtToken,
         },
         referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        // @ts-expect-error it works k
         agent: getAgent()
     });
     const data = response.json()
@@ -61,6 +62,7 @@ export async function postAnswer(questionId: number, answer: string, quizId: str
         },
         body: `{\"givenAnswer\":\"${answer}\"}`,
         referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        // @ts-expect-error it works k
         agent: getAgent()
     });
 

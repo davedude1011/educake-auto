@@ -146,8 +146,10 @@ export default function Page() {
                   getQuizData(quizId, jwtToken)
                     .then((response) => {
                       console.log(response)
+                      // d@ts-expect-error umd what?
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
                       setQuizData(response.attempt?.[String(quizId)])
+                      // d@ts-expect-error umd what?
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
                       questionDataLoop(response.attempt?.[String(quizId)])
                     })
