@@ -3,6 +3,15 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type Question } from "~/app/educakeType";
 
+import { HttpsProxyAgent } from "https-proxy-agent"
+import fetch from 'node-fetch'
+
+function getAgent() {
+    const proxyUrl = 'http://ozakzwmt:xnfgwh1v7ain@38.154.227.167:5868';
+    const agent = new HttpsProxyAgent(proxyUrl);
+    return agent
+}
+
 export async function getQuizData(quizId: string, jwtToken: string) {
     if (!jwtToken.startsWith("Bearer ")) {
         jwtToken = "Bearer " + jwtToken;
@@ -14,7 +23,8 @@ export async function getQuizData(quizId: string, jwtToken: string) {
             Accept: "application/json;version=2",
             Authorization: jwtToken,
         },
-        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
+        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        agent: getAgent()
     });
     const data = response.json()
 
@@ -51,7 +61,8 @@ export async function postAnswer(questionId: number, answer: string, quizId: str
             Authorization: jwtToken,
         },
         body: `{\"givenAnswer\":\"${answer}\"}`,
-        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
+        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        agent: getAgent()
     });
 
     const data = response.json()

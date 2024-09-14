@@ -5,6 +5,16 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    async reWrites() {
+        return [
+            {
+                source: "/redirect/:path*",
+                destination: "https://my.educake.co.uk/api/student/quiz/:path*",
+                permanent: false,
+            }
+        ]
+    }
+};
 
 export default config;

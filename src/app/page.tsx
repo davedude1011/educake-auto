@@ -74,6 +74,10 @@ export default function Page() {
 
   const [isDarkMode, setIsDarkMode] = useState(true)
 
+  const [serverNotWorking, setServerNotWorking] = useState(
+    !window.location.origin.includes("localhost")
+  )
+
   return (
     <div className={`bg-background w-screen h-screen ${isDarkMode && "dark"} flex itemscenter justify-center transition-all`}>
       <div className="z-30 text-primary absolute top-0 md:left-0 m-4">
@@ -119,7 +123,9 @@ export default function Page() {
             </DropdownMenuContent>
           </DropdownMenu>
           {
-            quizData ? (
+            serverNotWorking ? (
+              <div>This site currently isnt working on the server. <Nav href={"/um-why-is-the-site-not-working-on-server"}><Button className="px-0 text-blue-500" variant={"link"}>more info</Button></Nav> <br /><br /> <Button onClick={() => setServerNotWorking(false)}>Im running it locally</Button></div>
+            ) : quizData ? (
               <div className="flex flex-col gap-6 w-full md:w-[30rem] h-full md:h-fit">
                 <Progress value={completionPercent} />
                 <div className="flex flex-col gap-2 w-full md:w-[30rem] h-full md:h-fit">
@@ -146,10 +152,10 @@ export default function Page() {
                   getQuizData(quizId, jwtToken)
                     .then((response) => {
                       console.log(response)
-                      // d@ts-expect-error umd what?
+                      // s@ts-expect-error umd what?
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
                       setQuizData(response.attempt?.[String(quizId)])
-                      // d@ts-expect-error umd what?
+                      // s@ts-expect-error umd what?
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
                       questionDataLoop(response.attempt?.[String(quizId)])
                     })
