@@ -3,6 +3,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type Question } from "~/app/educakeType";
 
+import { HttpsProxyAgent } from "https-proxy-agent"
+
+function getAgent() {
+    const proxyUrl = 'http://ozakzwmt:xnfgwh1v7ain@38.154.227.167:5868';
+    const agent = new HttpsProxyAgent(proxyUrl);
+    return agent
+}
+
 export async function getQuizData(quizId: string, jwtToken: string) {
     if (!jwtToken.startsWith("Bearer ")) {
         jwtToken = "Bearer " + jwtToken;
@@ -13,20 +21,12 @@ export async function getQuizData(quizId: string, jwtToken: string) {
         headers: {
             Accept: "application/json;version=2",
             Authorization: jwtToken,
-            referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
         },
-        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
+        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        agent: getAgent()
     });
     const data = response.json()
 
-    console.log("GET QUIZ DATA")
-    console.log(process.env.GEMINI_API_KEY ?? "GEMINI_API_KEY")
-    console.log(jwtToken)
-    console.log("response")
-    console.log(response)
-    console.log("data")
-    console.log(data)
-    console.log("await data")
     console.log(await data)
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
@@ -43,7 +43,6 @@ export async function getAnswer(questionData: Question) {
     const result = await chat.sendMessage(JSON.stringify(questionData))
     const answer = result.response.text().replace(" \n", "").replace("\n", "")
 
-    console.log("GET ANSWER")
     console.log(answer)
 
     return answer
@@ -59,20 +58,14 @@ export async function postAnswer(questionId: number, answer: string, quizId: str
         headers: {
             Accept: "application/json;version=2",
             Authorization: jwtToken,
-            referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
         },
         body: `{\"givenAnswer\":\"${answer}\"}`,
-        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId
+        referrer: "https://my.educake.co.uk/my-educake/quiz/" + quizId,
+        agent: getAgent()
     });
 
     const data = response.json()
 
-    console.log("POST ANSWER")
-    console.log("response")
-    console.log(response)
-    console.log("data")
-    console.log(data)
-    console.log("await data")
     console.log(await data)
     
     return 1
