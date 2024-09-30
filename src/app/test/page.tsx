@@ -10,12 +10,16 @@ export default function Page() {
             {
                 JSON.stringify(data)
             }
-            <button onClick={() => {
-                /*
-                fetchData("https://educake.co.uk/")
-                    .then((response) => setData(response))
-                    .catch((error) => console.error('Error:', error))
-                */
+            <button onClick={async() => {
+                try {
+                    const response = await fetch('/api/fetchData');
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    const jsonData = await response.json();
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                    setData(jsonData);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }}>GET DATA</button>
         </div>
     )

@@ -127,7 +127,7 @@ export default function Page() {
           </DropdownMenu>
           {
             serverNotWorking ? (
-              <div>This site currently isnt working on the server. <Nav href={"/um-why-is-the-site-not-working-on-server"}><Button className="px-0 text-blue-500" variant={"link"}>more info</Button></Nav> <br /><br /> <Button onClick={() => setServerNotWorking(false)}>Im running it locally</Button></div>
+              <div>This project has been moved to. <Nav href={"https://www.task-tackler.com/"}><Button className="px-0 text-blue-500" variant={"link"}>https://www.task-tackler.com/</Button></Nav> <br /><br /> <Button onClick={() => setServerNotWorking(false)}>RUN LOCALLY</Button></div>
             ) : quizData ? (
               <div className="flex flex-col gap-6 w-full md:w-[30rem] h-full md:h-fit">
                 <Progress value={completionPercent} />
